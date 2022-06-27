@@ -2,5 +2,5 @@
 homepage: "https://www.reprisedigital.com"
 versions:
   # Latest version
-  - sha: 318edcf0ae8017b3e8c4c3d0ec20201942ac0a8c
+  - sha: 549697ee65572d9f64f66c194f98e1bd5f7771bc
     changeNotes: Initial release.
