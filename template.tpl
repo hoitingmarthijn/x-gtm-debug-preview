@@ -28,21 +28,21 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_SERVER___
 
+const getContainerVersion = require('getContainerVersion');
 const getCookieValues = require('getCookieValues');
 const toBase64 = require('toBase64');
 
-//Retrieve cookie values
-var gtm_preview = getCookieValues('gtm_preview')[0];
-var gtm_auth = getCookieValues('gtm_auth')[0];
-var gtm_debug = getCookieValues('gtm_debug')[0];
+const containerId = getContainerVersion()['containerId'];
 
-gtm_preview = gtm_preview.substring(12, 50);  //Remove container ID from cookie value
-gtm_auth = gtm_auth.substring(12, 50);  //Remove container ID from cookie value
-gtm_debug = gtm_debug.substring(12, 50);  //Remove container ID from cookie value
+// Retrieve cookie values
+const previewCookiesToBase64 = 
+  ['gtm_preview', 'gtm_auth', 'gtm_debug']
+  .map(previewCookieName => getCookieValues(previewCookieName)[0])
+  .map(previewCookie => previewCookie.replace(containerId, ''))
+  .join('|');
 
-var to_base_64 = gtm_preview+'|'+gtm_auth+'|'+gtm_debug;  //Putting all the cookies together devided by |
-
-const x_gtm_server_preview = toBase64(to_base_64);  //Encode it with base64 to get the X-Gtm-Preview-Header
+// Encode it with base64 to get the X-Gtm-Preview-Header
+const x_gtm_server_preview = toBase64(previewCookiesToBase64);  
 
 return x_gtm_server_preview;
 
