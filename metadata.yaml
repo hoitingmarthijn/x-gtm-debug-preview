@@ -2,5 +2,8 @@
 homepage: "https://www.reprisedigital.com"
 versions:
   # Latest version
+  - sha: b305f057e92a676d9bc461c36174f05ba09f93a2
+    changeNotes: Code refactor and dynamic removal of Container ID from cookie value.
+  # Initial version
   - sha: 549697ee65572d9f64f66c194f98e1bd5f7771bc
     changeNotes: Initial release.
