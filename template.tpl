@@ -32,13 +32,13 @@ const getContainerVersion = require('getContainerVersion');
 const getCookieValues = require('getCookieValues');
 const toBase64 = require('toBase64');
 
-const containerId = getContainerVersion()['containerId'];
+const containerId = getContainerVersion().containerId;
 
 // Retrieve cookie values
 const previewCookiesToBase64 = 
   ['gtm_preview', 'gtm_auth', 'gtm_debug']
   .map(previewCookieName => getCookieValues(previewCookieName)[0])
-  .map(previewCookie => previewCookie.replace(containerId, ''))
+  .map(previewCookie => previewCookie.replace(containerId + '=', ''))
   .join('|');
 
 // Encode it with base64 to get the X-Gtm-Preview-Header
